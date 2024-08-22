@@ -1,3 +1,6 @@
+## 1.1.2
+- Updated to flutter 3.19
+
 ## 1.1.1
 - Constructor is now const.
 - Updated docs & README.

@@ -172,6 +172,27 @@ class IsoDuration {
     throw FormatException('Could not parse the ISO Duration: $input');
   }
 
+  /// Build standart Duration object from IsoDuration
+  ///
+  /// Usage example:
+  ///
+  /// ```dart
+  /// final duration1 = IsoDuration.parse('P5Y').toDuration(); // IsoDuration{years: 5, months: 0, weeks: 0, days: 0, hours: 0, minutes: 0, seconds: 0};
+  /// final duration1 =IsoDuration.parse('P3Y6M4DT12H30M5S').toDuration(); // IsoDuration{years: 3, months: 6, weeks: 0, days: 4, hours: 12, minutes: 30, seconds: 5};
+  /// ```
+  Duration toDuration() {
+    final allDays = years.toInt() * 365 +
+        months.toInt() * 30 +
+        weeks.toInt() * 7 +
+        days.toInt();
+    return Duration(
+      days: allDays,
+      hours: hours.toInt(),
+      minutes: minutes.toInt(),
+      seconds: seconds.toInt(),
+    );
+  }
+
   /// Like [parse] but safely parses the ISO 8601 - Duration and
   /// returns `null` if the [input] is invalid.
   static IsoDuration? tryParse(String input) {
